@@ -33,7 +33,6 @@ jobs:
         with: 
             repository: seconize-co/wazuh
             ref: seconize
-            path: agent
       - name: Compile Agent Code
         run: |
             cd src

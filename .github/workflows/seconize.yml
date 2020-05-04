@@ -35,9 +35,8 @@ jobs:
             ref: seconize
             path: agent
       - name: Compile Agent Code
-        working-directory: ./agent
         run: |
-            cd wazuh/src
+            cd src
             make deps
             make TARGET=winagent  
             zip -r agent.zip ../../wazuh
@@ -47,5 +46,5 @@ jobs:
               --account-name sze \
               --account-key ${{ secrets.AZURE_KEY }} \
               --share-name builds \
-              --source "agent/agent.zip" \
+              --source "wazuh/agent.zip" \
               --path "commons/agent/agent.zip"      

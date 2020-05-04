@@ -45,5 +45,5 @@ jobs:
               --account-name sze \
               --account-key ${{ secrets.AZURE_KEY }} \
               --share-name builds \
-              --source "wazuh/agent.zip" \
+              --source "src/agent.zip" \
               --path "commons/agent/agent.zip"      

@@ -1,0 +1,49 @@
+# This workflow will build a Java project with Maven
+# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
+
+name: seconize-agent-setup
+
+on:
+  push:
+    branches: [ seconize ]
+  pull_request:
+    branches: [ seconize ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-18.04
+
+    steps:
+      - name: Install dependencies
+        run: |
+           apt-get install gcc-mingw-w64
+           apt-get install nsis
+           apt-get install make
+           curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+           sudo apt-get update
+           sudo apt-get install ca-certificates curl apt-transport-https lsb-release gnupg
+           curl -sL https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/microsoft.asc.gpg > /dev/null
+           AZ_REPO=$(lsb_release -cs)
+           echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $AZ_REPO main" | sudo tee /etc/apt/sources.list.d/azure-cli.list
+           sudo apt-get update
+           sudo apt-get install azure-cli
+      - name: Checkout Wazuh Code 
+        uses: actions/checkout@master
+        with: 
+            repository: seconize-co/wazuh
+            ref: seconize
+      - name: Compile Agent Code
+        run: |
+            cd src
+            make deps
+            make TARGET=winagent  
+            zip -r agent.zip ../../wazuh
+      - name: Upload zip file to Azure
+        run: |
+          az storage file upload \
+              --account-name sze \
+              --account-key ${{ secrets.AZURE_KEY }} \
+              --share-name builds \
+              --source "agent.zip" \
+              --path "commons/agent/agent.zip"      

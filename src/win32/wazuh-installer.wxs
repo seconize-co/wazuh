@@ -313,13 +313,13 @@
                     </Component>
                     <Component Id="OSSEC_AGENT_EVENTCHANNEL.EXE" DiskId="1" Guid="044E7997-12B6-4178-BD00-B90500DBA53F">
                         <File Id="OSSEC_AGENT_EVENTCHANNEL.EXE" Name="ossec-agent.exe" Source="ossec-agent-eventchannel.exe" />
-                        <ServiceInstall Name="OssecSvc" Type="ownProcess" Start="auto" ErrorControl="normal" Description="Wazuh Windows Agent" DisplayName="Wazuh" Id="svc_install_eventchannel" />
+                        <ServiceInstall Name="OssecSvc" Type="ownProcess" Start="auto" ErrorControl="normal" Description="Seconize Windows Agent" DisplayName="Seconize" Id="svc_install_eventchannel" />
                         <ServiceControl Id="svc_uninstall_eventchannel" Name="OssecSvc" Remove="uninstall" Stop="uninstall" Wait="yes" />
                         <Condition>VersionNT &gt;= 600</Condition>
                     </Component>
                     <Component Id="OSSEC_AGENT.EXE" DiskId="1" Guid="5CCEA6DC-8434-4137-9486-55AE3949266B">
                         <File Id="OSSEC_AGENT.EXE" Name="ossec-agent.exe" Source="ossec-agent.exe" />
-                        <ServiceInstall Name="OssecSvc" Type="ownProcess" Start="auto" ErrorControl="normal" Description="Wazuh Windows Agent" DisplayName="Wazuh" Id="svc_install" />
+                        <ServiceInstall Name="OssecSvc" Type="ownProcess" Start="auto" ErrorControl="normal" Description="Seconize Windows Agent" DisplayName="Seconize" Id="svc_install" />
                         <ServiceControl Id="svc_uninstall" Name="OssecSvc" Remove="uninstall" Stop="uninstall" Wait="yes" />
                         <Condition>VersionNT &lt; 600</Condition>
                     </Component>

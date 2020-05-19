@@ -22,28 +22,28 @@
 !define MUI_UNICON uninstall.ico
 !define VERSION "3.13.0"
 !define REVISION "31300"
-!define NAME "Wazuh"
+!define NAME "Seconize"
 !define SERVICE "OssecSvc"
 
 ; output file
 !ifndef OutFile
-    !define OutFile "wazuh-agent-${VERSION}.exe"
+    !define OutFile "seconize-agent-${VERSION}.exe"
 !endif
 
 Var is_upgrade
 
 Name "${NAME} Windows Agent v${VERSION}"
-BrandingText "Copyright (C) 2015-2020, Wazuh Inc."
+BrandingText "Copyright (C) 2015-2020, Seconize"
 OutFile "${OutFile}"
 
 VIProductVersion "3.10.0.0"
 VIAddVersionKey ProductName "${NAME}"
-VIAddVersionKey CompanyName "Wazuh Inc."
-VIAddVersionKey LegalCopyright "2020 - Wazuh Inc."
-VIAddVersionKey FileDescription "Wazuh Agent installer"
+VIAddVersionKey CompanyName "Seconize"
+VIAddVersionKey LegalCopyright "2020 - Seconize"
+VIAddVersionKey FileDescription "Seconize Agent installer"
 VIAddVersionKey FileVersion "${VERSION}"
 VIAddVersionKey ProductVersion "${VERSION}"
-VIAddVersionKey InternalName "Wazuh Agent"
+VIAddVersionKey InternalName "Seconize Agent"
 VIAddVersionKey OriginalFilename "${OutFile}"
 
 InstallDir "$PROGRAMFILES\ossec-agent"
@@ -139,7 +139,7 @@ Function .onInit
 FunctionEnd
 
 ; main install section
-Section "Wazuh Agent (required)" MainSec
+Section "Seconize Agent (required)" MainSec
     ; set install type and cwd
     SectionIn RO
     SetOutPath $INSTDIR

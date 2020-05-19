@@ -41,7 +41,7 @@ int gen_server_info(HWND hwnd)
     SetDlgItemText(hwnd, UI_SERVER_TEXT, config_inst.server);
 
     /* Set status data */
-    SendMessage(hStatus, SB_SETTEXT, 0, (LPARAM)"https://wazuh.com");
+    SendMessage(hStatus, SB_SETTEXT, 0, (LPARAM)"https://seconize.co");
     if (config_inst.revision) {
         SendMessage(hStatus, SB_SETTEXT, 1, (LPARAM)config_inst.revision);
     }
@@ -197,7 +197,7 @@ int config_read(__attribute__((unused)) HWND hwnd)
     /* Get version/revision */
 
     if (tmp_str = cat_file(VERSION_FILE, NULL), tmp_str) {
-        snprintf(buffer, sizeof(buffer), "Wazuh %s", tmp_str);
+        snprintf(buffer, sizeof(buffer), "Seconize %s", tmp_str);
         os_strdup(buffer, config_inst.version);
     }
 

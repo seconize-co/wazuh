@@ -48,6 +48,13 @@ int OS_AddNewAgent(keystore *keys, const char *id, const char *name, const char 
         snprintf(_id, 9, "%03d", ++keys->id_counter);
         id = _id;
     }
+    else {
+        char *endptr;
+        int id_number = strtol(id, &endptr, 10);
+
+        if ('\0' == *endptr && id_number > keys->id_counter)
+            keys->id_counter = id_number;
+    }
 
     if (!key) {
         snprintf(str1, STR_SIZE, "%d%s%d%s", (int)time(0), name, os_random(), getuname());
@@ -362,6 +369,16 @@ int OS_IsValidName(const char *u_name)
     }
 
     return (1);
+}
+
+void OS_ConvertToValidAgentName(char *u_name) {
+    size_t i, uname_length = strlen(u_name);
+    while((i = strspn(u_name, VALID_AGENT_NAME_CHARS)), i < uname_length )
+    {
+        // Invalid character detected, delete it
+        memmove(u_name + i, u_name + i + 1, uname_length - i);
+        uname_length--;
+    }
 }
 
 int NameExist(const char *u_name)
